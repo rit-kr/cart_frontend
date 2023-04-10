@@ -1,0 +1,38 @@
+.container{
+    max-width: 20rem;
+    margin: 0 auto;
+    .register-container{
+        max-width: 14rem;
+        margin: 0 auto;
+        // margin: 2rem 0;
+        padding: 2rem;
+        border: 0.1rem solid rgba(0, 0, 0, 0.4);
+    }
+}
+.register-logo {
+    max-width: 10rem;
+    margin: 0.5rem auto;
+
+    // background-color: #ffff;
+    img{
+        max-width: 6rem;
+    }
+}
+
+.register-input{
+    display: flex;
+    flex-direction: column;
+    .cinput{
+        padding: 0.5rem;
+        input{
+            width: 100%;
+        }
+    }
+}
+.register-button{
+        background-color: #f1c659cf;
+        margin: 1rem 0;
+        padding: 0.2rem 0;
+        width: 100%;
+        border-radius: 4px;
+    }
