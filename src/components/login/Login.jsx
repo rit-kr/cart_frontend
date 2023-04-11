@@ -1,9 +1,7 @@
-// import CButton from './cbutton';
 import './style.scss';
 import CInput from '../cinput/CInput';
 import { NavLink, useNavigate } from "react-router-dom";
-import CButton from '../cbutton/CButton';
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axiosInstance from '../../utilities/axios';
 
 
@@ -12,31 +10,26 @@ export default function Login() {
 
     // const navigate = useNavigate();
 
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+    const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
+    // const [password, setPassword] = useState();
 
     const handleLogin = async (e) => {
         e.preventDefault();
         const payload = {
             user: {
-                email,
-                password
+                ...loginInfo
             }
         }
-        console.log(payload)
+
         try {
             const response = await axiosInstance.post("/users/login", payload);
-            console.log("respon", response);
+
             localStorage.setItem('userInfo', JSON.stringify(response));
             // navigate("/");
         } catch (error) {
             console.log(error.message);
         }
     }
-
-    useEffect(() => {
-        handleLogin();
-    }, []);
 
     return (
         <>
@@ -47,18 +40,17 @@ export default function Login() {
                 <div className='login-container'>
                     <span>Sign in</span>
                     <div className='login-input'>
-                        <CInput className={'cinput'} label={'Email'} type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email"></CInput>
-                        <CInput className={'cinput'} label={'Password'} type="passport" onChange={(e) => setPassword(e.target.value)} placeholder="Password"></CInput>
+                        <CInput className={'cinput'} label={'Email'} type="email" onChange={(e) => setLoginInfo({ ...loginInfo, email: e })} placeholder="Email"></CInput>
+                        <CInput className={'cinput'} label={'Password'} type="passport" onChange={(e) => setLoginInfo({ ...loginInfo, password: e })} placeholder="Password"></CInput>
                         <button className='login-button' onClick={handleLogin} >Continue</button>
                     </div>
                     <div>
-                    <p>New to Amazon?</p>
-                    <button>
-                        <NavLink to="/register">Create your Amazon account</NavLink>
-                    </button>
+                        <p>New to Amazon?</p>
+                        <button>
+                            <NavLink to="/register">Create your Amazon account</NavLink>
+                        </button>
+                    </div>
                 </div>
-                </div>
-                
             </div>
         </>
     );
