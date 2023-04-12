@@ -5,20 +5,27 @@ import useSelection from "antd/es/table/hooks/useSelection"
 // import { formToJSON } from "axios"
 import CInput from '../cinput/CInput';
 import { useState } from "react"
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import { BsSearch, BsCart3 } from "react-icons/bs"
 export default function Header() {
 
     const [searchItem, setSearchItem] = useState(null);
 
-    // const onChange = (value) => {
-    //     console.log(`selected ${value}`);
-    //   };
-    //   const onSearch = (value) => {
-    //     console.log('search:', value);
+    const navigate = useNavigate();
 
     const handleSearch = () => {
 
+    }
+
+    const handleCart = () => {
+        navigate("/cart")
+        window.location.reload(true);
+    }
+
+    const handleLogout = () => {
+            localStorage.clear()
+            navigate("/login")
+            window.location.reload(true);
     }
     return (
         <>
@@ -54,8 +61,17 @@ export default function Header() {
                         <button className='search-btn' onClick={handleSearch} ><BsSearch /></button>
                     </div>
                     <div className='header_cart_section'>
-                        <NavLink className="header_login" to="/login">SignIn</NavLink>
-                        <NavLink className="header_cart" to="/cart"><BsCart3 /></NavLink>
+                        {
+                            localStorage.getItem('userInfo')
+                                ?
+                                <>
+                                <NavLink className="header_cart" onClick={handleCart} to="/cart"><BsCart3 /></NavLink>
+                                <NavLink className="header_login" onClick={handleLogout} to="/login">Logout</NavLink>
+                                </>
+
+                                :
+                                <NavLink className="header_login" to="/login">SignIn</NavLink>
+                        }
                     </div>
                 </div>
                 <div className="subheader">
@@ -71,7 +87,7 @@ export default function Header() {
                         <li>Amazon Pay</li>
                     </ul>
                     <div>
-                        <p>New launch from mobile and Electronics & more | Shop now</p>
+                        <p>Shopping made easy | Download the app</p>
                     </div>
                 </div>
             </header>

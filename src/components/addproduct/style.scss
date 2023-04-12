@@ -1,0 +1,24 @@
+.addproduct{
+    max-width: 38rem;
+    margin: 1rem auto;
+    .addproduct_input{
+        margin: 1rem auto;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        .cinput, label{
+            width: 15rem;
+            margin: 0.2rem 0;
+            flex-basis: 48%;
+        }
+        .addproduct_btn{
+            // flex-basis: 100%;
+            background-color: #f1c659cf;
+            margin: 1rem 0;
+            padding: 0.2rem 0;
+            width: 100%;
+            border-radius: 4px;
+        }
+    }
+}

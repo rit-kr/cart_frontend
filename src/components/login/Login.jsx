@@ -1,17 +1,16 @@
 import './style.scss';
 import CInput from '../cinput/CInput';
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axiosInstance from '../../utilities/axios';
 
 
 
 export default function Login() {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [loginInfo, setLoginInfo] = useState({ email: "", password: "" });
-    // const [password, setPassword] = useState();
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -20,14 +19,14 @@ export default function Login() {
                 ...loginInfo
             }
         }
-
         try {
             const response = await axiosInstance.post("/users/login", payload);
-
-            localStorage.setItem('userInfo', JSON.stringify(response));
-            // navigate("/");
+            console.log("res",response)
+            localStorage.setItem('userInfo', JSON.stringify(response.data));
+            navigate("/header");
+            window.location.reload(true);
         } catch (error) {
-            console.log(error.message);
+            console.error(error.message);
         }
     }
 
@@ -39,7 +38,7 @@ export default function Login() {
                 </div>
                 <div className='login-container'>
                     <span>Sign in</span>
-                    <div className='login-input'>
+                    <div className='login_input'>
                         <CInput className={'cinput'} label={'Email'} type="email" onChange={(e) => setLoginInfo({ ...loginInfo, email: e })} placeholder="Email"></CInput>
                         <CInput className={'cinput'} label={'Password'} type="passport" onChange={(e) => setLoginInfo({ ...loginInfo, password: e })} placeholder="Password"></CInput>
                         <button className='login-button' onClick={handleLogin} >Continue</button>
