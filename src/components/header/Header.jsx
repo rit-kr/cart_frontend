@@ -6,10 +6,17 @@ import useSelection from "antd/es/table/hooks/useSelection"
 import CInput from '../cinput/CInput';
 import { useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
-import { BsSearch, BsCart3 } from "react-icons/bs"
+import { BsSearch, BsCart3 } from "react-icons/bs";
+import { GiHamburgerMenu } from "react-icons/gi";
+import HamburgerMenu from '../headerhamburger/HamburgerMenu';
+
+
 export default function Header() {
 
     const [searchItem, setSearchItem] = useState(null);
+
+    const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
+
 
     const navigate = useNavigate();
 
@@ -27,6 +34,15 @@ export default function Header() {
             navigate("/login")
             window.location.reload(true);
     }
+
+    const toggleHamburgerMenu = () => {
+        setHamburgerMenuOpen(!hamburgerMenuOpen)
+    }
+
+    const handleClose = () => {
+        setHamburgerMenuOpen(false)
+    }
+    console.log(hamburgerMenuOpen);
     return (
         <>
             <header className='header'>
@@ -76,7 +92,14 @@ export default function Header() {
                 </div>
                 <div className="subheader">
                     <div>
-                        <p>All</p>
+                        <div>
+                            <GiHamburgerMenu onClick={toggleHamburgerMenu}/>
+                        {
+                        hamburgerMenuOpen ?
+                         <HamburgerMenu handleClose={handleClose}/>
+                         : null
+                        }
+                         </div>
                     </div>
                     <ul className='subheader_product'>
                         <li>Today's Deal</li>

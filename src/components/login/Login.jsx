@@ -1,7 +1,7 @@
 import './style.scss';
 import CInput from '../cinput/CInput';
 import { NavLink, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axiosInstance from '../../utilities/axios';
 
 

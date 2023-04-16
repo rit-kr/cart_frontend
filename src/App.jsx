@@ -5,6 +5,8 @@ import Header from './components/header/Header';
 import Addproduct from "./components/addproduct/Addproduct";
 import Cart from "./components/cart/Cart";
 import { Routes, Route } from 'react-router-dom';
+import Showproduct from "./components/showproduct/Showproduct";
+import Productdetails from "./components/productDetails/Productdetails";
 // import 'antd/dist/reset.css';
 
 
@@ -17,6 +19,9 @@ export default function App() {
             ?
             <>
               <Route path='/header' element={<Header />} />
+              <Route path='/products' element={<Showproduct />} />
+              <Route path='/productdetails' element={<Productdetails />} />
+
               <Route path='/addproduct' element={<Addproduct />} />
               <Route path='/cart' element={<Cart />} />
 

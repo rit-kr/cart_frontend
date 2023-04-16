@@ -1,6 +1,6 @@
 import './style.scss';
 import CInput from '../cinput/CInput';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate} from 'react-router-dom';
 import { useState } from "react";
 import { AiFillCaretRight } from 'react-icons/ai';
 import axiosInstance from '../../utilities/axios';
@@ -8,6 +8,7 @@ import axiosInstance from '../../utilities/axios';
 
 export default function Register() {
     const [registerInfo, setRegisterInfo] = useState({username:"",email:"",password:""});
+    const navigate = useNavigate();
 
     const handleRegister = async (e) => {
         e.preventDefault();
@@ -19,6 +20,9 @@ export default function Register() {
 
         try {
             const response = await axiosInstance.post("/users", payload);
+            console.log("register", response)
+            navigate("/login");
+            window.location.reload(true);
         } catch (error) {
             console.error(error.message);
         }
