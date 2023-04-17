@@ -1,11 +1,13 @@
 import "./style.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axiosInstance from "../../utilities/axios";
 import { NavLink, useNavigate } from "react-router-dom";
 
-import { Rate } from 'antd';
 
-export default function Showproduct() {
+import { Rate } from 'antd';
+import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
+
+export default function Showproduct(props) {
 
     const [items, setItems] = useState([])
     const navigate = useNavigate();
@@ -24,11 +26,9 @@ export default function Showproduct() {
         getProducts();
     }, []);
 
-    const handleDetails =(item) => {
-        // navigate("/productdetails")
-    }
-
-    console.log("items", items)
+    const Globalstate = useContext(Cartcontext);
+    const dispatch = Globalstate.dispatch;
+    console.log("cartContext", Globalstate);
 
     return (
         <>
@@ -36,14 +36,17 @@ export default function Showproduct() {
                 {
                     items.map(item =>
                         <li className="item" key={item.id}>
-                            <div onClick={() => handleDetails(item)}>
+                            <div onClick={() => props.handleProductDetails(item)}>
                                 <img src={item.image} alt="" />
                             </div>
-                            <p onClick={() => handleDetails(item)}>{item.name}</p>
+                            <p onClick={() => props.handleProductDetails(item)}>{item.name}</p>
                             <div>
                                 <Rate disabled defaultValue={item.stars} />
                             </div>
                             <p>${item.price}</p>
+                            <button className="add_to_cart_btn"
+                                onClick={() => dispatch({type:"ADD", payload:item})}
+                            >Add to cart</button>
                         </li>
                     )
                 }
