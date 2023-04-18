@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
 import axiosInstance from "../../utilities/axios";
 
-export default function Cart() {
+export default function Cart(props) {
 
     const [cartProducts, setCartProducts] = useState([]);
     // const Globalstate = useContext(Cartcontext);
@@ -39,8 +39,22 @@ export default function Cart() {
             <ul className="">
                 {
                     cartProducts.map(item =>
-                        <li>{item.name}</li>
-
+                        <li key={item.id}>
+                            <div>
+                                <img src={item.image} alt="cart_img" />
+                            </div>
+                            <p>{item.name}</p>
+                            <p>${item.price}</p>
+                            <div>
+                                <h3>${item.price * item.count}</h3>
+                                <button
+                                onClick={() => props.handleDecrease({ ...item })}
+                                >-</button>
+                                <button
+                                onClick={() => props.handleIncrement({ ...item })}
+                                >+</button>
+                            </div>
+                        </li>
                     )
                 }
             </ul>

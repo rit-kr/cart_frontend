@@ -9,6 +9,7 @@ import Showproduct from "./components/showproduct/Showproduct";
 import Productdetails from "./components/productDetails/Productdetails";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Home from "./components/home/Home";
 
 // import 'antd/dist/reset.css';
 
@@ -16,7 +17,6 @@ import { useState } from "react";
 export default function App() {
 
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [selectedProductForCart, setSelectedProductForCart] = useState(null)
 
   const navigate = useNavigate();
 
@@ -33,8 +33,9 @@ export default function App() {
           localStorage.getItem('userInfo')
             ?
             <>
-              <Route path='/header' element={<Header />} />
+              <Route path='/home' element={<Home handleProductDetails={handleProductDetails}/>} />
 
+              <Route path='/header' element={<Header />} />
               <Route path='/addproduct' element={<Addproduct />} />
               <Route path='/cart' element={<Cart />} />
 

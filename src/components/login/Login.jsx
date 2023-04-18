@@ -23,7 +23,7 @@ export default function Login() {
             const response = await axiosInstance.post("/users/login", payload);
             console.log("res",response)
             localStorage.setItem('userInfo', JSON.stringify(response.data));
-            navigate("/header");
+            navigate("/home");
             window.location.reload(true);
         } catch (error) {
             console.error(error.message);
