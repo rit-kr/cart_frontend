@@ -3,13 +3,15 @@ import Register from './components/register';
 import Login from './components/login';
 import Header from './components/header/Header';
 import Addproduct from "./components/addproduct/Addproduct";
-import Cart from "./components/cart/Cart";
+// import Cart from "./components/cart/Cart";
 import { Routes, Route } from 'react-router-dom';
 import Showproduct from "./components/showproduct/Showproduct";
 import Productdetails from "./components/productDetails/Productdetails";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Home from "./components/home/Home";
+import Setting from "./components/setting/Setting";
+import { UserContextProvider } from "./components/context/userContext/UserContextProvider";
 
 // import 'antd/dist/reset.css';
 
@@ -27,6 +29,7 @@ export default function App() {
     navigate("/productdetails")
   }
   return (
+        <UserContextProvider>
     <div className="App">
       <Routes>
         {
@@ -34,14 +37,13 @@ export default function App() {
             ?
             <>
               <Route path='/home' element={<Home handleProductDetails={handleProductDetails}/>} />
-
               <Route path='/header' element={<Header />} />
               <Route path='/addproduct' element={<Addproduct />} />
-              <Route path='/cart' element={<Cart />} />
-
+              {/* <Route path='/cart' element={<Cart />} /> */}
+              <Route path='/setting' element={<Setting />} />
             </>
-            :
-            <>
+              :
+              <>
               <Route path='/login' element={<Login />} />
               <Route path='/register' element={<Register />} />
               <Route path='*' element={<Login />} />
@@ -53,5 +55,6 @@ export default function App() {
         </>
       </Routes>
     </div>
+        </UserContextProvider>
   );
 };

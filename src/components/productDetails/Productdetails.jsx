@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import "./style.scss";
 import { Rate } from "antd";
-import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
+// import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
 import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utilities/axios";
-import Addcomment from "../comment/addcomment/Addcomment";
+// import Addcomment from "../comment/addcomment/Addcomment";
 import CInput from "../cinput/CInput";
 import {AiOutlineClose } from "react-icons/ai";
 
@@ -14,8 +14,8 @@ export default function Productdetails(props) {
     const [showComments, setShowComments] = useState([]);
 
     const navigate = useNavigate();
-    const Globalstate = useContext(Cartcontext);
-    const dispatch = Globalstate.dispatch;
+    // const Globalstate = useContext(Cartcontext);
+    // const dispatch = Globalstate.dispatch;
     // console.log("cartContext", Globalstate);
 
     const handleAddToCart = async (item) => {
@@ -137,7 +137,7 @@ export default function Productdetails(props) {
                     <div>
                         <div>
                             <p>Add comments</p>
-                            <Rate allowHalf  onChange={(e) => setAddComment({ ...Addcomment, stars: e })} />
+                            <Rate allowHalf  onChange={(e) => setAddComment({ ...addComment, stars: e })} />
                             <CInput className={'cinput'} type="text" onChange={(e) => setAddComment({ ...addComment, body: e })} placeholder="Add comment"></CInput>
                             <button className='Add_Comment_btn' onClick={() => handleAddComment(item)}>Continue</button>
                         </div>

@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 
 import { Rate } from 'antd';
-import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
+// import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
 
 export default function Showproduct(props) {
 
