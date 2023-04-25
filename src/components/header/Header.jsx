@@ -96,11 +96,7 @@ export default function Header() {
                                 ?
                                 <>
                                     <NavLink className="header_cart" onClick={handleCart} to="/cart"><BsCart3 /></NavLink>
-                                    <Space direction="vertical" size={16} onClick={handleSetting}>
-                                        <Space wrap size={16}>
-                                            <Avatar size="large" icon={user.username} />
-                                        </Space>
-                                    </Space>
+                                    <img className='profile_img' src={user.image} alt="profile" />
                                     <NavLink className="header_login" onClick={handleLogout} to="/login">Logout</NavLink>
                                 </>
 

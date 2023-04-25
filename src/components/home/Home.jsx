@@ -6,7 +6,6 @@ import { useState } from "react";
 export default function Home(props) {
     return (
         <>
-            <Header />
             <Showproduct
                 handleProductDetails={props.handleProductDetails}
                 // selectedProduct={props.selectedProduct}
