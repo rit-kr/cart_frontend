@@ -26,17 +26,13 @@ export default function Showproduct(props) {
         getProducts();
     }, []);
 
-    // const Globalstate = useContext(Cartcontext);
-    // const dispatch = Globalstate.dispatch;
-    // console.log("cartContext", Globalstate);
-
     return (
         <>
             <ul className="item_list">
                 {
                     items.map(item =>
                         <li className="item" key={item.id}>
-                            <div onClick={() => props.handleProductDetails(item)}>
+                            <div onClick={() => props.handleProductDetails(item)} >
                                 {
                                     item.image == null ?
                                 <img src={"https://picsum.photos/200/300.jpg"} alt="" />

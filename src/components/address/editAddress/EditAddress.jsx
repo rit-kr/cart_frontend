@@ -1,61 +1,74 @@
 import "./style.scss";
-import { useUserContext } from "../context/userContext/UserContextProvider";
-// import Imageupload from "../imageupload/ImageUpload";
+import { useAddressContext } from "../../context/addressContext/addressContextProvider";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Alert } from "antd";
 
-export default function EditUserLoginInfo() {
 
-    const navigate = useNavigate();
 
-    const { user, updateUser } = useUserContext();
+
+
+export default function EditAddress() {
+    const { address, editAddress } = useAddressContext();
 
     const [edit, setEdit] = useState('');
     const [info, setInfo] = useState({});
 
-    const handleEditUserInfo = async () => {
-        // e.preventDefault();
+    const navigate = useNavigate();
+
+
+    // const [info, setInfo] = useState({
+    //     name: "",
+    //     sonOf: "",
+    //     mobNumber: "",
+    //     address1: "",
+    //     address2: "",
+    //     area: "",
+    //     district: "",
+    //     state: "",
+    //     pinCode: ""
+    // });
+
+
+    const handleEditAddress = async (e) => {
+        e.preventDefault();
         const payload = {
-            user: {
-                ...info
+            address: {
+                id: "",
+                address: {
+                    ...info
+                }
             }
         }
-
         try {
-            await updateUser(payload)
-            setEdit('')
+            await editAddress(payload)
+            alert("Address updated");
         } catch (error) {
-            console.error(error.message);
+            Alert(error.message);
         }
     }
 
-    const handleBackToSetting = () => {
-        navigate("/setting")
+    const handleBackToAddress = () => {
+        navigate("/address");
+        window.location.reload(true);
     }
 
     return (
         <>
-            <div className="setting_profile_edit">
-                <div className="setting_profile">
-                    <div className="setting_profile_container">
-                        <div className="setting_profile_header">Login & security</div>
-                        {/* <div className="setting_profile_pic">
-                            <Imageupload />
-                        </div> */}
-                        <div className="setting_profile_list">
-                            <div className="setting_profile_item">
+            <div className="">
+                <div className="">
+                    <div className="">
+                        <div className="">Edit your address</div>
+                        <div className="">
+                            <div className="">
                                 <div>
-                                    <h3>Profile Picture</h3>
+                                    <h3>Name</h3>
                                     {
-                                        edit === 'image' ?
+                                        edit === 'name' ?
                                             <input
-                                                type="text"
-                                                // defaultValue={user?.image}
-                                                onChange={(e) => setInfo({ image: e.target.value })}
+                                                type="text" value={address.name}
+                                                onChange={(e) => setInfo({ name: e.target.value })}
                                             />
-                                            : <div className="setting_img_container">
-                                                <img className="setting_img" src={user?.image} alt="" />
-                                            </div>
                                     }
                                 </div>
                                 {
@@ -123,7 +136,7 @@ export default function EditUserLoginInfo() {
                     </div>
                 </div>
                 <div>
-                    <button className="back_to_setting_btn" onClick={handleBackToSetting}>Done</button>
+                    <button className="back_to_setting_btn" onClick={handleBackToAddress}>Done</button>
                 </div>
             </div>
         </>

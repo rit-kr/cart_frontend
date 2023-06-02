@@ -1,9 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import Header from "../header/Header";
 import Showproduct from "../showproduct/Showproduct";
-import { useState } from "react";
 
 export default function Home(props) {
+    console.log("home details", props.handleProductDetails);
     return (
         <>
             <Showproduct

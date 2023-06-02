@@ -55,7 +55,6 @@ export default function Productdetails(props) {
     const getComments = async () => {
         try {
             const response = await axiosInstance.get(`/comments/${props.selectedProduct._id}`);
-            console.log("singleComment comments", response.data.comments);
             setShowComments(response.data.comments)
         } catch (error) {
             console.error(error.message);
@@ -67,7 +66,6 @@ export default function Productdetails(props) {
         try {
             const response = await axiosInstance.delete(`/comments/${singleComment.id}/${singleComment.productId}`);
             await getComments();
-            // setAddComment({ stars: "", body: "", productId: "" });
         } catch (error) {
             console.error(error.message);
         }

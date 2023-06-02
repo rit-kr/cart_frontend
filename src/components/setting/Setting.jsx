@@ -19,6 +19,16 @@ export default function Setting(props) {
         window.location.reload(true);
     }
 
+    // const handleEditAddress = () => {
+    //     navigate("/addAddress");
+    //     window.location.reload(true);
+    // }
+
+    const handleShowAddress = () => {
+        navigate("/address");
+        window.location.reload(true);
+    }
+
     return (
         <>
             <div className="setting">
@@ -54,7 +64,7 @@ export default function Setting(props) {
                                 <p>Be a prime member</p>
                             </div>
                         </div>
-                        <div className="setting_items">
+                        <div className="setting_items" onClick={handleShowAddress}>
                             <div className="icon">
                                 <RiMapPinFill />
                             </div>

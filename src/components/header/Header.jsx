@@ -27,8 +27,6 @@ export default function Header() {
         }
     }, []);
 
-    console.log("user", user)
-
     const handleSearch = () => {
 
     }
@@ -56,7 +54,6 @@ export default function Header() {
     const handleClose = () => {
         setHamburgerMenuOpen(false)
     }
-    console.log(hamburgerMenuOpen);
     return (
         <>
             <header className='header'>
@@ -96,7 +93,7 @@ export default function Header() {
                                 ?
                                 <>
                                     <NavLink className="header_cart" onClick={handleCart} to="/cart"><BsCart3 /></NavLink>
-                                    <img className='profile_img' src={user.image} alt="profile" />
+                                    <img onClick={handleSetting} to="/setting" className='profile_img' src={user?.image} alt="profile" />
                                     <NavLink className="header_login" onClick={handleLogout} to="/login">Logout</NavLink>
                                 </>
 

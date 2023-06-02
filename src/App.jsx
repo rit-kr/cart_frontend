@@ -13,6 +13,10 @@ import Showproduct from "./components/showproduct/Showproduct";
 import Productdetails from "./components/productDetails/Productdetails";
 import Setting from "./components/setting/Setting";
 import EditUserLoginInfo from "./components/editUserLoginInfo/EditUserLoginInfo";
+import AddAddress from "./components/address/addAddress/AddAddress";
+import { AddressContextProvider } from "./components/context/addressContext/addressContextProvider";
+import ShowAddress from "./components/address/showAddress/ShowAddress";
+import EditAddress from "./components/address/editAddress/EditAddress";
 
 // import 'antd/dist/reset.css';
 
@@ -29,43 +33,43 @@ export default function App() {
     console.log("selected", item);
     navigate("/productdetails")
   }
+
   return (
     <UserContextProvider>
-      <div className="App">
-        {/* <Routes> */}
-        {
-          localStorage.getItem('userInfo')
-            ?
-            <>
-              <Header />
-              <Routes>
-                <Route path='/home' element={<Home handleProductDetails={handleProductDetails} />} />
-                <Route path='/header' element={<Header />} />
-                <Route path='/addproduct' element={<Addproduct />} />
-                {/* <Route path='/cart' element={<Cart />} /> */}
-                <Route path='/setting' element={<Setting />} />
-                <Route path='editUserLoginInfo' element={<EditUserLoginInfo />} />
-                <Route path='*' element={<Home />} />
-              </Routes>
-
-            </>
-            :
-            <>
-              <Routes>  
-                <Route path='/login' element={<Login />} />
-                <Route path='/register' element={<Register />} />
-                <Route path='*' element={<Login />} />
-              </Routes>
-            </>
-        }
-        <>
-          <Routes>
-            <Route path='/products' element={<Showproduct handleProductDetails={handleProductDetails} />} />
-            <Route path='/productdetails' element={<Productdetails selectedProduct={selectedProduct} />} />
-          </Routes>
-        </>
-        {/* </Routes> */}
-      </div>
+      <AddressContextProvider>
+        <div className="App">
+          {
+            localStorage.getItem('userInfo')
+              ?
+              <>
+                <Header />
+                <Routes>
+                  <Route path='/home' element={<Home handleProductDetails={handleProductDetails}/>} />
+                  <Route path='/addproduct' element={<Addproduct />} />
+                  {/* <Route path='/cart' element={<Cart />} /> */}
+                  <Route path='/setting' element={<Setting  />} />
+                  <Route path='editUserLoginInfo' element={<EditUserLoginInfo />} />
+                  <Route path='/addAddress' element={<AddAddress />} />
+                  <Route path='/editAddress' element={<EditAddress />} />
+                  <Route path='/address' element={<ShowAddress />} />
+                  <Route path='/products' element={<Showproduct handleProductDetails={handleProductDetails} />} />
+                  <Route path='/productdetails' element={<Productdetails selectedProduct={selectedProduct} />} />
+                  <Route path='*' element={<Home handleProductDetails={handleProductDetails}/>} />
+                </Routes>
+              </>
+              :
+              <>
+                <Routes>
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/register' element={<Register />} />
+                  <Route path='*' element={<Login />} />
+                  <Route path='/products' element={<Showproduct handleProductDetails={handleProductDetails} />} />
+                  <Route path='/productdetails' element={<Productdetails selectedProduct={selectedProduct} />} />
+                </Routes>
+              </>
+          }
+        </div>
+      </AddressContextProvider>
     </UserContextProvider>
   );
 };
