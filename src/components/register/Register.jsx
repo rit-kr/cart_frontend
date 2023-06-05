@@ -11,7 +11,7 @@ export default function Register() {
     const navigate = useNavigate();
 
     const handleRegister = async (e) => {
-        e.preventDefault();
+            
         const payload = {
             user: {
                 ...registerInfo

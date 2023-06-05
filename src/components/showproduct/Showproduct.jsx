@@ -5,7 +5,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 
 
 import { Rate } from 'antd';
-import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
+// import { Cartcontext } from "../../contextProvider/cartContext/Cartcontext";
 
 export default function Showproduct(props) {
 
@@ -26,18 +26,19 @@ export default function Showproduct(props) {
         getProducts();
     }, []);
 
-    const Globalstate = useContext(Cartcontext);
-    const dispatch = Globalstate.dispatch;
-    console.log("cartContext", Globalstate);
-
     return (
         <>
             <ul className="item_list">
                 {
                     items.map(item =>
                         <li className="item" key={item.id}>
-                            <div onClick={() => props.handleProductDetails(item)}>
+                            <div onClick={() => props.handleProductDetails(item)} >
+                                {
+                                    item.image == null ?
+                                <img src={"https://picsum.photos/200/300.jpg"} alt="" />
+                                    :
                                 <img src={item.image} alt="" />
+                                }
                             </div>
                             <p onClick={() => props.handleProductDetails(item)}>{item.name}</p>
                             <div>
@@ -45,7 +46,7 @@ export default function Showproduct(props) {
                             </div>
                             <p>${item.price}</p>
                             <button className="add_to_cart_btn"
-                                onClick={() => dispatch({type:"ADD", payload:item})}
+                                // onClick={() => dispatch({type:"ADD", payload:item})}
                             >Add to cart</button>
                         </li>
                     )

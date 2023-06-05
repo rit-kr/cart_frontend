@@ -1,10 +1,9 @@
 
 import './style.scss';
-import { Select } from 'antd';
+import { Avatar, Select, Space } from 'antd';
 import useSelection from "antd/es/table/hooks/useSelection"
-// import { formToJSON } from "axios"
 import CInput from '../cinput/CInput';
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import { BsSearch, BsCart3 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -14,11 +13,19 @@ import HamburgerMenu from '../headerhamburger/HamburgerMenu';
 export default function Header() {
 
     const [searchItem, setSearchItem] = useState(null);
+    const [user, setUser] = useState([]);
 
     const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
 
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const info = JSON.parse(localStorage.getItem('userInfo'));
+        if (info) {
+            setUser(info.user);
+        }
+    }, []);
 
     const handleSearch = () => {
 
@@ -29,10 +36,15 @@ export default function Header() {
         window.location.reload(true);
     }
 
+    const handleSetting = () => {
+        navigate("/setting")
+        window.location.reload(true);
+    }
+
     const handleLogout = () => {
-            localStorage.clear()
-            navigate("/login")
-            window.location.reload(true);
+        localStorage.clear()
+        navigate("/login")
+        window.location.reload(true);
     }
 
     const toggleHamburgerMenu = () => {
@@ -42,7 +54,6 @@ export default function Header() {
     const handleClose = () => {
         setHamburgerMenuOpen(false)
     }
-    console.log(hamburgerMenuOpen);
     return (
         <>
             <header className='header'>
@@ -81,8 +92,9 @@ export default function Header() {
                             localStorage.getItem('userInfo')
                                 ?
                                 <>
-                                <NavLink className="header_cart" onClick={handleCart} to="/cart"><BsCart3 /></NavLink>
-                                <NavLink className="header_login" onClick={handleLogout} to="/login">Logout</NavLink>
+                                    <NavLink className="header_cart" onClick={handleCart} to="/cart"><BsCart3 /></NavLink>
+                                    <img onClick={handleSetting} to="/setting" className='profile_img' src={user?.image} alt="profile" />
+                                    <NavLink className="header_login" onClick={handleLogout} to="/login">Logout</NavLink>
                                 </>
 
                                 :
@@ -93,13 +105,13 @@ export default function Header() {
                 <div className="subheader">
                     <div>
                         <div>
-                            <GiHamburgerMenu onClick={toggleHamburgerMenu}/>
-                        {
-                        hamburgerMenuOpen ?
-                         <HamburgerMenu handleClose={handleClose}/>
-                         : null
-                        }
-                         </div>
+                            <GiHamburgerMenu onClick={toggleHamburgerMenu} />
+                            {
+                                hamburgerMenuOpen ?
+                                    <HamburgerMenu handleClose={handleClose} />
+                                    : null
+                            }
+                        </div>
                     </div>
                     <ul className='subheader_product'>
                         <li>Today's Deal</li>

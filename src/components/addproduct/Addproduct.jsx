@@ -44,7 +44,6 @@ export default function Addproduct() {
 
         try {
             const response = await axiosInstance.post("/admin/add", payload);
-            console.log("res", response)
         } catch (error) {
             console.error(error.message);
         }
