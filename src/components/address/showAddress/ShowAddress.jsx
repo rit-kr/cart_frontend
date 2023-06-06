@@ -1,3 +1,4 @@
+import "./style.scss";
 import { useEffect, useState } from "react";
 import axiosInstance from "../../../utilities/axios";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -12,7 +13,6 @@ export default function ShowAddress() {
     const getAddressess = async () => {
         try {
             const response = await axiosInstance.get("/user/address");
-            // console.log("res items", response.data);
             setItems(response.data.address)
         } catch (error) {
             console.error(error);
@@ -39,7 +39,7 @@ export default function ShowAddress() {
         getAddressess();
     }, []);
 
-    const handleAddAddress = () =>{
+    const handleAddAddress = () => {
         navigate("/addAddress");
         window.location.reload(true);
     }
@@ -48,24 +48,33 @@ export default function ShowAddress() {
 
     return (
         <>
-        <button onClick={handleAddAddress}>Add new Address</button>
-            <ul>
-                {items.map(item =>
-                    <li key={item._id}>
-                        <div>
-                            <p>{item.address.name}</p>
-                            <p>{item.address.address1}</p>
-                            <p>{item.address.address2}</p>
-                            <p>{item.address.district}</p>
-                        </div>
-                        <div onClick={() => handleDeleteAddress(item._id)} >
-                            <AiOutlineDelete/>
-                        </div>
-                        <span onClick={() => handleEditAddressPage(item)}>Edit</span>
-                    </li>
-                )
-                }
-            </ul>
+            <div className="address">
+                <h4>Your Address</h4>
+                <div className="show_address">
+                    <div className="add_new_address" onClick={handleAddAddress}>Add new Address</div>
+                    <ul className="">
+                        {items.map(item =>
+                            <li className="new_address" key={item._id}>
+                                <div className="address_items">
+                                    <p className="name">{item.address.name}</p>
+                                    <p className="address">{item.address.address1} {item.address.address2}</p>
+                                    {/* <p className="">{item.address.address2}</p> */}
+                                    <p className="">{item.address.district}</p>
+                                    <p className="">{item.address.pinCode}</p>
+                                    <p className="">{item.address.area}</p>
+                                    <p className="">{item.address.mobNumber}</p>
+
+                                </div>
+                                <div onClick={() => handleDeleteAddress(item._id)} >
+                                    <AiOutlineDelete />
+                                </div>
+                                {/* <span onClick={() => handleEditAddressPage(item)}>Edit</span> */}
+                            </li>
+                        )
+                        }
+                    </ul>
+                </div>
+            </div>
         </>
     )
 }

@@ -40,7 +40,7 @@ export default function AddAddress() {
             await addAddress(payload)
             alert("New address added");
         } catch (error) {
-            Alert(error.message);
+            alert(error.message);
         }
     }
 
@@ -51,9 +51,9 @@ export default function AddAddress() {
 
     return (
         <>
-            <div className="">
-                <h1>Add your address</h1>
-                <div>
+            <div className="add_address">
+                <h3>Add your address</h3>
+                <div className="">
                     <form className="addAddress_form"
                         onSubmit={handleAddAddress}
                     >
@@ -88,7 +88,7 @@ export default function AddAddress() {
                         <button>Continue</button>
                     </form>
                 </div>
-                <button onClick={handleBackToAddress}>Back to Address</button>
+                <button className="back_to_address_button" onClick={handleBackToAddress}>Back to Address</button>
             </div>
         </>
     )

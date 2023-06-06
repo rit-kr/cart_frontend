@@ -1,7 +1,28 @@
-.addAddress_form{
-    display: flex;
-    justify-content: space-between;
-    // align-items: center;
-    flex-direction: column;
-    flex-wrap: wrap;
+.add_address{
+    margin: 0 auto;
+    max-width: 60rem;
+    h3{
+        margin: 1rem;
+        text-align: center;
+        font-size: xx-large;
+    }
+    .addAddress_form{
+        padding: 0.5rem;
+        display: flex;
+        justify-content: space-between;
+        // align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+        label{
+            padding: 0.2rem 0;
+        }
+        button{
+            margin: 0.7rem 0;
+            background-color: #f1c659cf;
+        }
+    }
+    .back_to_address_button{
+        margin: 0.7rem;
+        background-color: #f1c659cf;
+    }
 }

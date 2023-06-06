@@ -34,7 +34,7 @@ export default function Setting(props) {
             <div className="setting">
                 <div className="setting_container">
                     <div className="setting_header">
-                        <h1>Your Account</h1>
+                        <h3>Your Account</h3>
                         <p>Manage your profile</p>
                     </div>
                     <div className="setting_list">

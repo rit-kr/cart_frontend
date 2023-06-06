@@ -17,6 +17,7 @@ import AddAddress from "./components/address/addAddress/AddAddress";
 import { AddressContextProvider } from "./components/context/addressContext/addressContextProvider";
 import ShowAddress from "./components/address/showAddress/ShowAddress";
 import EditAddress from "./components/address/editAddress/EditAddress";
+import Cart from "./components/cart/cart";
 
 // import 'antd/dist/reset.css';
 
@@ -52,6 +53,8 @@ export default function App() {
                   <Route path='/addAddress' element={<AddAddress />} />
                   <Route path='/editAddress' element={<EditAddress />} />
                   <Route path='/address' element={<ShowAddress />} />
+                  <Route path='/cart' element={<Cart />} />
+
                   <Route path='/products' element={<Showproduct handleProductDetails={handleProductDetails} />} />
                   <Route path='/productdetails' element={<Productdetails selectedProduct={selectedProduct} />} />
                   <Route path='*' element={<Home handleProductDetails={handleProductDetails}/>} />

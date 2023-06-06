@@ -1,15 +1,19 @@
 .setting{
     margin: 0 auto;
-}
-.setting_container{
     max-width: 60rem;
-    margin: 0 1rem;
+    .setting_container{
+        margin: 0 1rem;
     .setting_header{
-        // background-color: #dccf1274;
-        padding: 1rem 0;
+        text-align: center;
+        padding: 3rem;
+        h3{
+            font-size:xx-large;
+        }
+        p{
+            font-size:large;
+        }
     }
     .setting_list{
-
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -17,7 +21,7 @@
 
         .setting_items{
             border: 0.1rem solid rgba(0, 0, 0, 0.309);
-            border-radius: 0.2rem;
+            border-radius: 0.5rem;
             width: 45%;
             margin: 0.5rem 0;
             padding: 0.5rem 0 2rem 0;
@@ -27,15 +31,17 @@
             color: rgba(0, 0, 0, 0.738);
         }
         .icon{
+            color: #f3c245cf;
             font-size: 2.5rem;
             padding:  0 1rem ;
         }
         .setting_items:hover{
-                background-color: #e7e5e571;;
-            }
+            background-color: #e7e5e571;;
+        }
         h4{
             font-weight: 500;
             padding: 0.5rem 0;
         }
     }
+}
 }
