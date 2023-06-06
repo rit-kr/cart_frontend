@@ -28,11 +28,12 @@ export default function Showproduct(props) {
         getProducts();
     }, []);
 
-    const handleAddToCart = async (item, cartQuantity = 1) => {
+    const handleAddToCart = async (item) => {
         // e.preventDefault();
         const payload = {
             product: {
-                id: item._id
+                id: item._id,
+                count:1,
             }
         }
         try {

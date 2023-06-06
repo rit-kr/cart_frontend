@@ -6,16 +6,26 @@ export default function Cart(props) {
 
     const [cartProduct, setCartProduct] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState([]);
-    const [quantity, setQuantity] = useState(null);
+    const [count, setCount] = useState(null);
 
     const getCartProduct = async () => {
         try {
             const response = await axiosInstance.get("/user/cart");
-            console.log(response.data.cart.product);
+            console.log(response.data.cart);
             setCartProduct(response.data.cart.product)
         } catch (error) {
             console.error(error);
 
+        }
+    }
+
+    const handleDeleteProduct = async (singleProduct) => {
+        try {
+            const response = await axiosInstance.delete(`/user/cart/${singleProduct._id}`);
+            console.log(response.data);
+            await getCartProduct();
+        } catch (error) {
+            console.error(error.message);
         }
     }
 
@@ -26,7 +36,7 @@ export default function Cart(props) {
     const handleIncrease = (product) => {
         const newSelectedProduct = selectedProduct.map((p) => {
             if (p.sku === product.sku) {
-                return { ...p, quantity: p.quantity + 1 }
+                return { ...p, count: p.count + 1 }
             } else {
                 return p;
             }
@@ -37,7 +47,7 @@ export default function Cart(props) {
     const handleDecrease = (product) => {
         const newSelectedProduct = selectedProduct.map((p, i) => {
             if (p.sku === product.sku) {
-                return { ...p, quantity: p.quantity - 1 }
+                return { ...p, count: p.count - 1 }
             } else {
                 return p;
             }
@@ -47,14 +57,10 @@ export default function Cart(props) {
 
     const handleCheckout = () => {
         const totalAmount = selectedProduct.reduce((total, curVal) => {
-            return (total + (curVal.price * curVal.quantity))
+            return (total + (curVal.price * curVal.count))
         }, 0)
         alert(`checkout- Subtotal: $ ${totalAmount}`)
     };
-
-    const handleCheckout = () => {
-        
-    }
 
     return (
         <>
@@ -70,13 +76,16 @@ export default function Cart(props) {
                             <div className=" center column  flex-30">
                                 <h3>{product.name}</h3>
 
-                                <h4>Quantity: {product.quantity}</h4>
+                                <h4>Quantity: {product.count}</h4>
                             </div>
                             <div>
-                                <h3>${product.price * product.quantity}</h3>
+                                <h3>${product.price * product.count}</h3>
                                 <button onClick={() => handleDecrease({ ...product })}>-</button>
                                 <button onClick={() => handleIncrease({ ...product })}>+</button>
                             </div>
+                            <button onClick={() => handleDeleteProduct({ ...product })}>Remove</button>
+
+
                         </div>
                     )
                 })
@@ -88,7 +97,7 @@ export default function Cart(props) {
                         <h3>Subtotal</h3>
                         <h4>$
                             {selectedProduct.reduce((total, curVal) => {
-                                return (total + (curVal.price * curVal.quantity))
+                                return (total + (curVal.price * curVal.count))
                             }, 0)}
                         </h4>
                     </div>
