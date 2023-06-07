@@ -1,9 +1,14 @@
 .item_list{
+    background-color: #c4bfbf16;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    margin: 2rem 0.5rem;
+    margin: 2rem 5rem;
+}
+.item{
+    padding: 1.5rem;
+    // flex: 20%;
 }
 .add_to_cart_btn{
     background-color: #f1c659cf;

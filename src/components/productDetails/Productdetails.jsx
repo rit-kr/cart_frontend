@@ -6,7 +6,12 @@ import { Link, useNavigate } from "react-router-dom";
 import axiosInstance from "../../utilities/axios";
 // import Addcomment from "../comment/addcomment/Addcomment";
 import CInput from "../cinput/CInput";
-import {AiOutlineClose } from "react-icons/ai";
+import { AiOutlineClose, AiFillDelete } from "react-icons/ai";
+import { RxAvatar } from "react-icons/rx";
+
+
+
+
 
 export default function Productdetails(props) {
     const [cartInfo, setCartInfo] = useState({ id: "", count: 1 });
@@ -67,6 +72,7 @@ export default function Productdetails(props) {
             const response = await axiosInstance.delete(`/comments/${singleComment.id}/${singleComment.productId}`);
             await getComments();
         } catch (error) {
+            alert("You can't delete this comment");
             console.error(error.message);
         }
     }
@@ -82,65 +88,67 @@ export default function Productdetails(props) {
     const item = props.selectedProduct;
     return (
         <>
-            <div className="product_detils">
-                <div className="product_img">
-                    <img src={item.image} alt="img" />
-                </div>
-                <div className="product_detils_">
-                    <div>
-                        <p>{item.name}</p>
+            <div className="product_detils_page">
+
+                <div className="product_detils">
+                    <div className="product_img">
+                        <img src={item?.image} alt="img" />
+                    </div>
+                    <div className="product_detils_">
                         <div>
-                            <Rate disabled defaultValue={item.stars} />
+                            <p>{item.name}</p>
+                            <div>
+                                <Rate disabled defaultValue={item.stars} />
+                            </div>
+                            <p>${item.price}</p>
                         </div>
-                        <p>${item.price}</p>
-                    </div>
-                    <div>
-                        <p>{item.brand}</p>
-                        <p>{item.varient.color}</p>
-                    </div>
-                    <div>
-                        <p>{item.discription}</p>
-                    </div>
-                </div>
-                <div >
-                    <p>${item.price}</p>
-                    <button className="add_to_cart_product_btn"
-                        // onClick={() => dispatch({type:"ADD", payload:item})}
-                        onClick={() => handleAddToCart(item)}
-                    >Add to cart</button>
-                </div>
-            </div>
-            <div className="comments">
-                <ul className="comment">
-                    {
-                    (showComments.length > 0)
-                    ? showComments.map(singleComment =>
-                        <li className="show_comments">
-                            <div className="comment_display">
-                                <div>{singleComment.username}</div>
-                                <Rate disabled allowHalf defaultValue={singleComment.stars} />
-                                <p>{singleComment.body}</p>
-                            </div>
-                            <div className="delete_comment" onClick={() => handleDeleteComment(singleComment)}>
-                                <span>Delete</span>
-                            </div>
-                        </li>
-                    )
-                    :<div>Yor are first to add comment</div>
-                    }
-                </ul>
-            </div>
-            <div>
-                <div className="add_comment">
-                    <div>
                         <div>
+                            <p>{item.brand}</p>
+                            <p>{item.varient.color}</p>
+                        </div>
+                        <div>
+                            <p>{item.discription}</p>
+                        </div>
+                    </div>
+                    <div >
+                        <p>${item.price}</p>
+                        <button className="add_to_cart_product_btn"
+                            // onClick={() => dispatch({type:"ADD", payload:item})}
+                            onClick={() => handleAddToCart(item)}
+                        >Add to cart</button>
+                    </div>
+                </div>
+                <div>
+                    <div className="add_comment">
+                        <div className="add_comment_items">
                             <p>Add comments</p>
-                            <Rate allowHalf  onChange={(e) => setAddComment({ ...addComment, stars: e })} />
+                            <Rate allowHalf onChange={(e) => setAddComment({ ...addComment, stars: e })} />
                             <CInput className={'cinput'} type="text" onChange={(e) => setAddComment({ ...addComment, body: e })} placeholder="Add comment"></CInput>
                             <button className='Add_Comment_btn' onClick={() => handleAddComment(item)}>Continue</button>
                         </div>
                     </div>
                 </div>
+                <div className="comments">
+                    <ul className="comment">
+                        {
+                            (showComments.length > 0)
+                                ? showComments.map(singleComment =>
+                                    <li className="show_comments">
+                                        <div className="comment_display">
+                                            <div className="user_id"><span><RxAvatar /></span> {singleComment.username}</div>
+                                            <Rate disabled allowHalf defaultValue={singleComment.stars} />
+                                            <p>{singleComment.body}</p>
+                                        </div>
+                                        <div className="delete_comment" onClick={() => handleDeleteComment(singleComment)}>
+                                            <span><AiFillDelete /></span>
+                                        </div>
+                                    </li>
+                                )
+                                : <div>Yor are first to add comment</div>
+                        }
+                    </ul>
+                </div>
+
             </div>
         </>
     )

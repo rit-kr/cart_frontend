@@ -33,13 +33,12 @@ export default function Showproduct(props) {
         const payload = {
             product: {
                 id: item._id,
-                count:1,
+                count:1
             }
         }
         try {
             const res = await addToCart(payload);
-            // alert("New item added");
-            
+            alert("New item added");
         } catch (error) {
             console.error(error.message);
         }

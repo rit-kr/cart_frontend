@@ -1,8 +1,15 @@
+
+.product_detils_page{
+    padding: 2rem ;
+    background-color: #9c98981c;
+}
 .product_detils{
-    margin: 5rem;
-    max-width: 40rem;
+    background-color: #9c98982b;
+    padding: 1rem;
+    // max-width: 40rem;
     display: flex;
     justify-content: space-between;
+    border-radius: 0.5rem;
     align-items: start;
     .product_detils_{
         & div{
@@ -19,11 +26,29 @@
         border-radius: 4px;
 }
 
-.show_comments{
+.add_comment{
     margin: 1rem 0;
-    background-color: #69666683;
-    max-width: 20rem;
+    padding:1rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
     display: flex;
     justify-content: space-between;
+}
+.add_comment_items p, .add_comment_items button{
+    margin: 0.6rem 0;
+}
 
+.show_comments{
+    margin: 1rem 0;
+    padding:1rem;
+    background-color: #69666659;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+}
+.comment_display p, .comment_display div{
+    margin-top: 0.2rem;
+}
+.user_id{
+    padding: 0.5rem 0;
 }

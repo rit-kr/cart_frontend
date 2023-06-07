@@ -1,5 +1,7 @@
-import React, {useEffect, useState } from "react";
+import "./cart.scss"
+import React, { useEffect, useState } from "react";
 import axiosInstance from "../../utilities/axios";
+import {AiFillDelete} from "react-icons/ai"
 
 
 export default function Cart(props) {
@@ -71,27 +73,23 @@ export default function Cart(props) {
                 </div>
                 {cartProduct.map((product) => {
                     return (
-                        <div className="flex margin justify-evenly">
-                            <img className="cart-img " src={`${product.image}`} alt="Tshirt" />
+                        <div className="cart_items">
+                            <img className="cart-img w-1 h-1" src={`${product.image}`} alt="Tshirt" />
                             <div className=" center column  flex-30">
                                 <h3>{product.name}</h3>
-
                                 <h4>Quantity: {product.count}</h4>
+                                <h3>${product.price * product.count}</h3>
                             </div>
                             <div>
-                                <h3>${product.price * product.count}</h3>
+                                <button onClick={() => handleDeleteProduct({ ...product })}><AiFillDelete/></button>
                                 <button onClick={() => handleDecrease({ ...product })}>-</button>
+                                <span>1{product.count}</span>
                                 <button onClick={() => handleIncrease({ ...product })}>+</button>
                             </div>
-                            <button onClick={() => handleDeleteProduct({ ...product })}>Remove</button>
-
-
                         </div>
                     )
                 })
                 }
-
-
                 <div>
                     <div className="flex justify-evenly margin">
                         <h3>Subtotal</h3>
